@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SetBalanceDefault extends Migration
+class AlterCategories extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -13,9 +13,8 @@ class SetBalanceDefault extends Migration
 	 */
 	public function up()
 	{
-		Schema::table('users', function ($table) {
-			$table->double('balance', 10, 2)->nullable()->default(0)->change();
-			$table->integer('profile')->nullable()->default(1)->change();
+		Schema::table('categories', function ($table) {
+			$table->integer('typeMedia');
 		});
 	}
 
@@ -26,6 +25,6 @@ class SetBalanceDefault extends Migration
 	 */
 	public function down()
 	{
-		//
+		$table->dropColumn(['typeMedia']);
 	}
 }

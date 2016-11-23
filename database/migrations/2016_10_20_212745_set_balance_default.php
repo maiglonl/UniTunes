@@ -14,7 +14,7 @@ class SetBalanceDefault extends Migration
 	public function up()
 	{
 		Schema::table('users', function ($table) {
-			$table->decimal('balance', 10, 2)->nullable()->default(0)->change();
+			$table->decimal('credits', 10, 2)->nullable()->default(0)->change();
 			$table->integer('profile')->nullable()->default(1)->change();
 		});
 	}

@@ -44,7 +44,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p1.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p1.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Tempered Song</a>
@@ -80,7 +80,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p2.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p2.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Vivamus vel tincidunt libero</a>
@@ -112,7 +112,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p3.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p3.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Morbi id neque quam liquam sollicitudin</a>
@@ -148,7 +148,7 @@
 										<i class="fa fa-bookmark i-lg"></i>
 									</span>
 								</div>
-								<a href="#"><img src="images/p4.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p4.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Tincidunt libero</a>
@@ -180,7 +180,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p5.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p5.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Fermentum diam</a>
@@ -214,7 +214,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p6.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p6.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Habitant</a>
@@ -249,7 +249,7 @@
 								<div class="top">
 									<span class="pull-right m-t-sm m-r-sm badge bg-white">12</span>
 								</div>
-								<a href="#"><img src="images/p7.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p7.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Vivamus vel tincidunt libero</a>
@@ -280,7 +280,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p8.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p8.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Aliquam sollicitudin venenati</a>
@@ -312,7 +312,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p9.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p9.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Lementum ligula vitae</a>
@@ -348,7 +348,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p10.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p10.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Egestas dui nec fermentum </a>
@@ -380,7 +380,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p11.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p11.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Aliquam sollicitudin venenatis ipsum</a>
@@ -411,7 +411,7 @@
 										</a>
 									</div>
 								</div>
-								<a href="#"><img src="images/p12.jpg" alt="" class="r r-2x img-full"></a>
+								<a href="#"><img src="{{ URL::asset('images/p12.jpg') }}" alt="" class="r r-2x img-full"></a>
 							</div>
 							<div class="padder-v">
 								<a href="#" class="text-ellipsis">Vestibulum ullamcorper</a>
@@ -438,7 +438,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a2.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a2.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Spring rain</a>
@@ -454,7 +454,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a3.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a3.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Hope</a>
@@ -470,7 +470,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a8.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a8.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Listen wind</a>
@@ -486,7 +486,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a9.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a9.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Breaking me</a>
@@ -502,7 +502,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a1.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a1.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Nothing</a>
@@ -518,7 +518,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a6.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a6.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Panda Style</a>
@@ -534,7 +534,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a7.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a7.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Hook Me</a>
@@ -550,7 +550,7 @@
 											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
 										</div>
 									</div>
-									<a href="#"><img src="images/a5.png" alt="" class="r r-2x img-full"></a>
+									<a href="#"><img src="{{ URL::asset('images/a5.png') }}" alt="" class="r r-2x img-full"></a>
 								</div>
 								<div class="padder-v">
 									<a href="#" class="text-ellipsis">Tempered Song</a>
@@ -569,7 +569,7 @@
 						<a href="#" class="list-group-item clearfix">
 							<span class="pull-right h2 text-muted m-l">1</span>
 							<span class="pull-left thumb-sm avatar m-r">
-								<img src="images/a4.png" alt="...">
+								<img src="{{ URL::asset('images/a4.png') }}" alt="...">
 							</span>
 							<span class="clear">
 								<span>Little Town</span>
@@ -579,7 +579,7 @@
 						<a href="#" class="list-group-item clearfix">
 							<span class="pull-right h2 text-muted m-l">2</span>
 							<span class="pull-left thumb-sm avatar m-r">
-								<img src="images/a5.png" alt="...">
+								<img src="{{ URL::asset('images/a5.png') }}" alt="...">
 							</span>
 							<span class="clear">
 								<span>Lementum ligula vitae</span>
@@ -589,7 +589,7 @@
 						<a href="#" class="list-group-item clearfix">
 							<span class="pull-right h2 text-muted m-l">3</span>
 							<span class="pull-left thumb-sm avatar m-r">
-								<img src="images/a6.png" alt="...">
+								<img src="{{ URL::asset('images/a6.png') }}" alt="...">
 							</span>
 							<span class="clear">
 								<span>Aliquam sollicitudin venenatis</span>
@@ -599,7 +599,7 @@
 						<a href="#" class="list-group-item clearfix">
 							<span class="pull-right h2 text-muted m-l">4</span>
 							<span class="pull-left thumb-sm avatar m-r">
-								<img src="images/a7.png" alt="...">
+								<img src="{{ URL::asset('images/a7.png') }}" alt="...">
 							</span>
 							<span class="clear">
 								<span>Aliquam sollicitudin venenatis ipsum</span>
@@ -609,7 +609,7 @@
 						<a href="#" class="list-group-item clearfix">
 							<span class="pull-right h2 text-muted m-l">5</span>
 							<span class="pull-left thumb-sm avatar m-r">
-								<img src="images/a8.png" alt="...">
+								<img src="{{ URL::asset('images/a8.png') }}" alt="...">
 							</span>
 							<span class="clear">
 								<span>Vestibulum ullamcorper</span>

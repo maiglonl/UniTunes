@@ -18,7 +18,7 @@
 							<div class="top">
 								<span class="badge bg-dark m-l-sm m-t-sm">03:20</span>
 							</div>
-							<a href="video-detail.html"><img src="images/m40.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m40.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Tempered Song</a>
@@ -37,7 +37,7 @@
 							<div class="top">
 								<span class="badge bg-dark m-l-sm m-t-sm">02:10</span>
 							</div>
-							<a href="video-detail.html"><img src="images/m41.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m41.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Morbi id neque quam</a>
@@ -56,7 +56,7 @@
 							<div class="top">
 								<span class="badge bg-dark m-l-sm m-t-sm">05:40</span>
 							</div>
-							<a href="video-detail.html"><img src="images/m42.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m42.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Aliquam sollicitudin venenatis ipsum</a>
@@ -78,7 +78,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m40.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m40.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Tempered Song</a>
@@ -94,7 +94,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m41.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m41.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Morbi id neque quam</a>
@@ -110,7 +110,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m42.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m42.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Aliquam sollicitudin venenatis ipsum</a>
@@ -126,7 +126,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m43.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m43.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Citudin venenatis ipsum ac</a>
@@ -142,7 +142,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m44.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m44.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Vestibulum ullamcorper sodales nisi</a>
@@ -158,7 +158,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m40.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m40.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Mauris convallis mauris at</a>
@@ -174,7 +174,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m45.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m45.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Sodales nisi nec condimentum</a>
@@ -190,7 +190,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m44.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m44.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Nisi nec condimentum</a>
@@ -206,7 +206,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m43.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m43.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Phasellus at ultricies nequ</a>
@@ -222,7 +222,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m42.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m42.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Quis malesuada augue</a>
@@ -238,7 +238,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m41.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m41.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Ipsum ac feugiat</a>
@@ -254,7 +254,7 @@
 									<a href="video-detail.html"><i class="fa fa-play-circle i-2x"></i></a>
 								</div>
 							</div>
-							<a href="video-detail.html"><img src="images/m40.jpg" alt="" class="r r-2x img-full"></a>
+							<a href="video-detail.html"><img src="{{ URL::asset('images/m40.jpg') }}" alt="" class="r r-2x img-full"></a>
 						</div>
 						<div class="padder-v">
 							<a href="video-detail.html" class="text-ellipsis">Ullamcorper sodales nisi nec condimentu</a>

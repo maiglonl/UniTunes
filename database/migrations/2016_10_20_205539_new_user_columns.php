@@ -14,7 +14,7 @@ class NewUserColumns extends Migration
 	public function up()
 	{
 		Schema::table('users', function ($table) {
-			$table->double('balance', 10, 2);
+			$table->double('credits', 10, 2);
 			$table->integer('profile');
 		});
 	}
@@ -27,7 +27,7 @@ class NewUserColumns extends Migration
 	public function down()
 	{
 		Schema::table('users', function ($table) {
-			$table->dropColumn(['balance', 'profile']);
+			$table->dropColumn(['credits', 'profile']);
 		});
 	}
 }
