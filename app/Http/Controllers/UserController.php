@@ -8,6 +8,7 @@ use App\Medias;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller{
 	public function profile($id){
@@ -44,6 +45,15 @@ class UserController extends Controller{
 		$uploads = DB::table('medias')
 			->where(['idUser' => $author->id])
 			->count();
+		$purchases = DB::table('trades')
+			->where(['idUser' => $id])
+			->count();
+		$sales = DB::table('trades')
+			->leftJoin('medias', 'trades.idMedia', '=', 'medias.id')
+			->where(['medias.idUser' => $id])
+			->count();
+		$canDelete = $isAdmin || ($author->id == Auth::id() && $author->profile > 0);
+
 		return view('users.profile', [
 			'author' => $author,
 			'musics' => $musics,
@@ -51,13 +61,44 @@ class UserController extends Controller{
 			'podcasts' => $podcasts,
 			'books' => $books,
 			'uploads' => $uploads,
-			'isAdmin' => $isAdmin
+			'isAdmin' => $isAdmin,
+			'purchases' => $purchases,
+			'sales' => $sales,
+			'canDelete' => $canDelete
+		]);
+	}
+
+	public function home(){
+		return $this->profile(Auth::id());
+	}
+
+	public function usersList(){
+		$admin = DB::table('users')
+			->where(['profile' => '0'])
+			->orderBy('updated_at', 'desc')
+			->get();
+		$authors = DB::table('users')
+			->where(['profile' => '2'])
+			->orderBy('updated_at', 'desc')
+			->get();
+		$academics = DB::table('users')
+			->where(['profile' => '1'])
+			->orderBy('updated_at', 'desc')
+			->get();
+		return view('users.list', [
+			'admins' => $admin,
+			'authors' => $authors,
+			'academics' => $academics
 		]);
 	}
 
 	public function deleteUser($id){
+		$isAdmin = Auth::user()->profile == 0;
+		$itself = Auth::id() == $id;
 		$user = User::find($id);
-		$user->delete();
+		if(($isAdmin || $itself) && $user->profile > 0){
+			$user->delete();
+		}
 		return Redirect::to('home');
 	}
 }

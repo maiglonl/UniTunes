@@ -14,28 +14,50 @@
 									</a>
 									<div>
 										<div class="h3 m-t-xs m-b-xs">{{ $author->name }}</div>
+										@switch($author->profile)
+											@case(0) 
+												<div class="h4 m-t-xs m-b-xs">[ Administrador ]</div> 
+											@breakswitch
+											@case(1) 
+												<div class="h4 m-t-xs m-b-xs">[ Acadêmico ]</div> 
+											@breakswitch
+											@case(2) 
+												<div class="h4 m-t-xs m-b-xs">[ Autor ]</div> 
+											@breakswitch
+										@endswitch
 										<small class="text-muted"><i class="fa fa-envelope-o"></i> {{ $author->email }}</small>
 									</div>                
 								</div>
 								<div class="panel wrapper">
 									<div class="row text-center">
-										<div class="col-xs-6">
+										<div class="col-xs-4">
 											<a href="#">
 												<span class="m-b-xs h4 block">{{ $uploads }}</span>
 												<small class="text-muted">Uploads</small>
 											</a>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-4">
 											<a href="#">
-												<span class="m-b-xs h4 block">55</span>
+												<span class="m-b-xs h4 block">{{ $purchases }}</span>
+												<small class="text-muted">Compras</small>
+											</a>
+										</div>
+										<div class="col-xs-4">
+											<a href="#">
+												<span class="m-b-xs h4 block">{{ $sales }}</span>
 												<small class="text-muted">Vendas</small>
 											</a>
 										</div>
 									</div>
 								</div>
 								<div class="btn-group btn-group-justified m-b">
-									@if($isAdmin)
-										<a class="btn btn-danger btn-rounded">
+									@if($author->id == Auth::id())
+										<a href="{{ route('users.delete', $author->id) }}" class="btn btn-success btn-rounded">
+											<i class="fa fa-plus"></i> Add Créditos
+										</a>
+									@endif
+									@if($canDelete)
+										<a href="{{ route('users.delete', $author->id) }}" class="btn btn-danger btn-rounded">
 											<i class="fa fa-times"></i> Excluir Conta
 										</a>
 									@endif
@@ -70,6 +92,17 @@
 												</a>
 											</li>
 										@endforeach
+										@if(count($musics) == 0)
+											<h4 class="text-center m-t-xl">Nenhuma música encontrada.</h4>
+										@endif
+										@if($author->id == Auth::id())
+											<div class="text-center m-t-xl">
+												<a href="{{ route('musics.new') }}" class=" m-t-lg">
+													Cadastrar nova música
+													<i class="icon-cloud-upload i-lg inline"></i>
+												</a>
+											</div>
+										@endif
 									</ul>
 								</div>
 								<div class="tab-pane" id="videos">
@@ -86,6 +119,17 @@
 												</a>
 											</li>
 										@endforeach
+										@if(count($videos) == 0)
+											<h4 class="text-center m-t-xl">Nenhum video encontrada.</h4>
+										@endif
+										@if($author->id == Auth::id())
+											<div class="text-center m-t-xl">
+												<a href="{{ route('musics.new') }}" class=" m-t-lg">
+													Cadastrar novo video
+													<i class="icon-cloud-upload i-lg inline"></i>
+												</a>
+											</div>
+										@endif
 									</ul>
 								</div>
 								<div class="tab-pane" id="podcasts">
@@ -102,6 +146,17 @@
 												</a>
 											</li>
 										@endforeach
+										@if(count($podcasts) == 0)
+											<h4 class="text-center m-t-xl">Nenhum podcast encontrada.</h4>
+										@endif
+										@if($author->id == Auth::id())
+											<div class="text-center m-t-xl">
+												<a href="{{ route('musics.new') }}" class=" m-t-lg">
+													Cadastrar novo podcast
+													<i class="icon-cloud-upload i-lg inline"></i>
+												</a>
+											</div>
+										@endif
 									</ul>
 								</div>
 								<div class="tab-pane" id="books">
@@ -118,6 +173,17 @@
 												</a>
 											</li>
 										@endforeach
+										@if(count($books) == 0)
+											<h4 class="text-center m-t-xl">Nenhum livro encontrada.</h4>
+										@endif
+										@if($author->id == Auth::id())
+											<div class="text-center m-t-xl">
+												<a href="{{ route('musics.new') }}" class=" m-t-lg">
+													Cadastrar novo livro
+													<i class="icon-cloud-upload i-lg inline"></i>
+												</a>
+											</div>
+										@endif
 									</ul>
 								</div>
 							</div>

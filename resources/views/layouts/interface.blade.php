@@ -42,6 +42,27 @@
 				</div>
 			</form>
 			<!-- /Search Input -->
+			<div class="navbar-right ">
+				<ul class="nav navbar-nav m-n hidden-xs nav-user user">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
+							<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+								<img src="{{ URL::asset("images/userIcon.png") }}" alt="...">
+							</span>
+							{{ Auth::user()->name }} <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu animated fadeInRight">            
+							<li>
+								<a href="{{ route('users.home') }}">Profile</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</header>
 		<section>
 			<section class="hbox stretch">
@@ -85,6 +106,12 @@
 											<a href="{{ route('books.home') }}">
 												<i class="icon-book-open icon text-info-dker"></i>
 												<span class="font-bold">Livros</span>
+											</a>
+										</li>
+										<li>
+											<a href="{{ route('users.list') }}">
+												<i class="icon-user icon text-info-dker"></i>
+												<span class="font-bold">Usuários</span>
 											</a>
 										</li>
 										<li>

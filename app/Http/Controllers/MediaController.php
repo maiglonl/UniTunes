@@ -50,9 +50,11 @@ class MediaController extends Controller{
 	}
 	public function downloadMedia($id){
 		$media = Medias::find($id);
-		$fileName = $media->id.".".$media->mediaExt;
-		$filePath = "storage/medias/".$fileName;
+		$fileName = $media->authors."_".$media->name.".".$media->mediaExt;
+		$filePath = "storage/medias/".$media->id.".".$media->mediaExt;
 		if (file_exists($filePath)){
+			$media->downloads++;
+			$media->save();
 			// Send Download
 			return Response::download($filePath, $fileName, [
 				'Content-Length: '. filesize($filePath)
@@ -84,7 +86,13 @@ class MediaController extends Controller{
 				'idUser' => Auth::user()->id
 			]);
 			$media = Medias::create($request->except(["_token", "image", "media"]));
-			
+
+			$user = User::find(Auth::user()->id);
+			if($user->profile == 1){
+				$user->profile = 2;
+				$user->save();
+			}
+
 			// upload the image //
 			$file = $request->image;
 			$destination_path = 'storage/images';
@@ -121,12 +129,27 @@ class MediaController extends Controller{
 	}
 
 	public function musicsHome(){
+		// Novidades
 		$musics = DB::table('medias')
 			->where('typeMedia', '1')
 			->orderBy('updated_at', 'desc')
 			->limit(12)
 			->get();
-		return view('musics.home', ['musics' => $musics]);
+
+		// Mais Baixadas
+		$tops = DB::table('medias')
+			->where('typeMedia', '1')
+			->orderBy('downloads', 'desc')
+			->limit(10)
+			->get();
+
+		// Favoritos
+		// TODO
+
+		return view('musics.home', [
+			'musics' => $musics,
+			'tops' => $tops
+		]);
 	}
 	public function musicsNewMedia(){
 		$categs = DB::table('categories')->where('typeMedia', '1')->orderBy('name')->get();

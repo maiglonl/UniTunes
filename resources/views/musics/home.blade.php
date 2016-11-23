@@ -3,7 +3,7 @@
 @section('intContent')
 	<section class="vbox">
 		<section class="scrollable padder-lg w-f-md" id="bjax-target">
-			<!-- Discover -->
+			<!-- Novidades -->
 			<div class="row">
 				<div class="col-xs-12">
 					<a href="{{ route('musics.new') }}" class="pull-right text-muted m-t-lg">
@@ -41,7 +41,7 @@
 											</div>
 										</div>
 										<div class="top">
-											<span class="pull-right m-t-sm m-r-sm badge bg-white">12</span>
+											<span class="pull-right m-t-sm m-r-sm badge bg-white">{{ $music->downloads }}</span>
 										</div>
 										<a href="#"><img style="height: 200px;" src="{{ URL::asset("storage/images/$music->id.$music->imageExt") }}" alt="{{ $music->name }}" class="r r-2x img-full"></a>
 									</div>
@@ -55,11 +55,11 @@
 					</div>
 				</div>
 			</div>
-			<!-- /Discover -->
+			<!-- /Novidades -->
 
-			<!-- NewSongs/TopSongs -->
+			<!-- Favoritos/TopSongs -->
 			<div class="row">
-				<!-- NewSongs -->
+				<!-- Favoritos -->
 				<div class="col-md-7">
 					<h3 class="font-thin">New Songs</h3>
 					<div class="row row-sm">
@@ -193,67 +193,30 @@
 						</div>
 					</div>
 				</div>
-				<!-- /NewSongs -->
+				<!-- /Favoritos -->
 
 				<!-- TopSongs -->
 				<div class="col-md-5">
-					<h3 class="font-thin">Top Songs</h3>
+					<h3 class="font-thin">Top 10</h3>
 					<div class="list-group bg-white list-group-lg no-bg auto">
-						<a href="#" class="list-group-item clearfix">
-							<span class="pull-right h2 text-muted m-l">1</span>
-							<span class="pull-left thumb-sm avatar m-r">
-								<img src="{{ URL::asset('images/a4.png') }}" alt="...">
-							</span>
-							<span class="clear">
-								<span>Little Town</span>
-								<small class="text-muted clear text-ellipsis">by Chris Fox</small>
-							</span>
-						</a>
-						<a href="#" class="list-group-item clearfix">
-							<span class="pull-right h2 text-muted m-l">2</span>
-							<span class="pull-left thumb-sm avatar m-r">
-								<img src="{{ URL::asset('images/a5.png') }}" alt="...">
-							</span>
-							<span class="clear">
-								<span>Lementum ligula vitae</span>
-								<small class="text-muted clear text-ellipsis">by Amanda Conlan</small>
-							</span>
-						</a>
-						<a href="#" class="list-group-item clearfix">
-							<span class="pull-right h2 text-muted m-l">3</span>
-							<span class="pull-left thumb-sm avatar m-r">
-								<img src="{{ URL::asset('images/a6.png') }}" alt="...">
-							</span>
-							<span class="clear">
-								<span>Aliquam sollicitudin venenatis</span>
-								<small class="text-muted clear text-ellipsis">by Dan Doorack</small>
-							</span>
-						</a>
-						<a href="#" class="list-group-item clearfix">
-							<span class="pull-right h2 text-muted m-l">4</span>
-							<span class="pull-left thumb-sm avatar m-r">
-								<img src="{{ URL::asset('images/a7.png') }}" alt="...">
-							</span>
-							<span class="clear">
-								<span>Aliquam sollicitudin venenatis ipsum</span>
-								<small class="text-muted clear text-ellipsis">by Lauren Taylor</small>
-							</span>
-						</a>
-						<a href="#" class="list-group-item clearfix">
-							<span class="pull-right h2 text-muted m-l">5</span>
-							<span class="pull-left thumb-sm avatar m-r">
-								<img src="{{ URL::asset('images/a8.png') }}" alt="...">
-							</span>
-							<span class="clear">
-								<span>Vestibulum ullamcorper</span>
-								<small class="text-muted clear text-ellipsis">by Dan Doorack</small>
-							</span>
-						</a>
+
+						@foreach($musics as $key => $music)
+							<a href="{{ route('musics.details', $music->id) }}" class="list-group-item clearfix">
+								<span class="pull-right h2 text-muted m-l">{{ $key+1 }}</span>
+								<span class="pull-left thumb-sm avatar m-r">
+									<img src="{{ URL::asset("storage/images/$music->id.$music->imageExt") }}" alt="...">
+								</span>
+								<span class="clear">
+									<span>{{ $music->name }}</span>
+									<small class="text-muted clear text-ellipsis">{{ $music->authors }}</small>
+								</span>
+							</a>
+						@endforeach
 					</div>
 				</div>
 				<!-- /TopSongs -->
 			</div>
-			<!-- /NewSongs/TopSongs -->
+			<!-- /Favoritos/TopSongs -->
 		</section>
 
 		<!-- Player -->

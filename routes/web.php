@@ -46,4 +46,7 @@ Route::get('/medias/delete/{id}', "MediaController@deleteMedia")->name("medias.d
 | Users Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/users/home', "UserController@home")->name("users.home");
+Route::get('/users/list', "UserController@usersList")->name("users.list");
+Route::get('/users/delete/{id}', "UserController@deleteUser")->name("users.delete");
 Route::get('/users/profile/{id}', "UserController@profile")->name("users.profile");
