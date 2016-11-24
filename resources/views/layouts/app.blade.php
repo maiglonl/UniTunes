@@ -16,7 +16,8 @@
 		<link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" type="text/css" />
 		<link rel="stylesheet" href="{{ URL::asset('css/simple-line-icons.css') }}" type="text/css" />
 		<link rel="stylesheet" href="{{ URL::asset('css/font.css') }}" type="text/css" />
-		<link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" type="text/css" />  
+		<link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" type="text/css" />
+		<link rel="stylesheet" href="{{ URL::asset('js/sweetalert/sweetalert2.min.css') }}" type="text/css" />
 		<!--[if lt IE 9]>
 			<script src="{{ URL::asset('js/ie/html5shiv.js') }}"></script>
 			<script src="{{ URL::asset('js/ie/respond.min.js') }}"></script>
@@ -46,6 +47,7 @@
 		<script src="{{ URL::asset('js/jPlayer/jquery.jplayer.min.js') }}"></script>
 		<script src="{{ URL::asset('js/jPlayer/add-on/jplayer.playlist.min.js') }}"></script>
 		<script src="{{ URL::asset('js/jPlayer/demo.js') }}"></script>
+		<script src="{{ URL::asset('js/sweetalert/sweetalert2.min.js') }}"></script>
 
 		@yield('appFooter')
 

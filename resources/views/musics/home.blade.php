@@ -36,7 +36,11 @@
 												</a>
 											</div>
 											<div class="bottom padder m-b-sm">
-												<a href="#" class="pull-right"><i class="fa fa-heart-o"></i></a>
+												@if($music->idFavorite != null)
+													<a href="{{ route('favorites.unset', $music->idFavorite) }}" class="pull-right"> <i class="fa fa-heart text-danger"></i></a>
+												@else
+													<a href="{{ route('favorites.set', $music->id) }}" class="pull-right"><i class="fa fa-heart-o "></i></a>
+												@endif
 												<a href="#"><i class="fa fa-plus-circle"></i></a>
 											</div>
 										</div>

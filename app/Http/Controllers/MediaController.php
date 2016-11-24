@@ -8,10 +8,12 @@ use Response;
 use App\Medias;
 use App\User;
 use App\Trades;
+use App\Favorites;
 use App\Categories;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -127,14 +129,38 @@ class MediaController extends Controller{
 			'media' => $media
 		]);
 	}
+	public function setFavorite($idMedia){
+		$count = DB::table('favorites')
+			->where([
+				['idMedia', $idMedia],
+				['idUser', Auth::id()],
+			])
+			->count();
+		if($count == 0){
+			$media = Medias::find($idMedia);
+			$fav = new Favorites;
+			$fav->idMedia = $idMedia;
+			$fav->typeMedia = $media->typeMedia;
+			$fav->idUser = Auth::id();
+			$fav->save();
+		}
+	}
+	public function unsetFavorite($idMedia){
+		
+	}
+
 
 	public function musicsHome(){
 		// Novidades
 		$musics = DB::table('medias')
-			->where('typeMedia', '1')
-			->orderBy('updated_at', 'desc')
+			->leftJoin('favorites', function($join){
+				$join->on('favorites.idMedia', '=', 'medias.id');
+				$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+			})
+			->where('medias.typeMedia', '1')
+			->orderBy('medias.updated_at', 'desc')
 			->limit(12)
-			->get();
+			->get(['medias.*', 'favorites.id AS idFavorite']);
 
 		// Mais Baixadas
 		$tops = DB::table('medias')

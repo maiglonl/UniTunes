@@ -1,6 +1,11 @@
+@php
+	$class = $author->id == Auth::id() ? '3' : '4';
+@endphp
+
 @extends('layouts.interface')
 
 @section('intContent')
+	<meta name="csrf-token" content="{{ Session::token() }}">
 	<section class="vbox">
 		<section class="scrollable">
 			<section class="hbox stretch">
@@ -30,12 +35,21 @@
 								</div>
 								<div class="panel wrapper">
 									<div class="row text-center">
-										<div class="col-xs-4">
-											<a href="#">
-												<span class="m-b-xs h4 block">{{ $uploads }}</span>
-												<small class="text-muted">Uploads</small>
-											</a>
-										</div>
+										@if($author->id == Auth::id())
+											<div class="col-xs-4">
+												<a href="#">
+													<span class="m-b-xs h4 block">{{ $author->credits }}</span>
+													<small class="text-muted">Créditos</small>
+												</a>
+											</div>
+										@else
+											<div class="col-xs-4">
+												<a href="#">
+													<span class="m-b-xs h4 block">{{ $uploads }}</span>
+													<small class="text-muted">Uploads</small>
+												</a>
+											</div>
+										@endif
 										<div class="col-xs-4">
 											<a href="#">
 												<span class="m-b-xs h4 block">{{ $purchases }}</span>
@@ -52,7 +66,7 @@
 								</div>
 								<div class="btn-group btn-group-justified m-b">
 									@if($author->id == Auth::id())
-										<a href="{{ route('users.delete', $author->id) }}" class="btn btn-success btn-rounded">
+										<a class="btn btn-success btn-rounded" onclick="teste()">
 											<i class="fa fa-plus"></i> Add Créditos
 										</a>
 									@endif
@@ -194,4 +208,38 @@
 		</section>
 	</section>
 	<a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
+	<script type="text/javascript">
+		function teste() {
+			swal({
+				title: 'Quanto deseja adicionar?',
+				input: 'text',
+				showCancelButton: true,
+				inputValidator: function (value) {
+					return new Promise(function (resolve, reject) {
+						val = parseFloat(value);
+						if(!isNaN(val)){
+							resolve();
+						} else {
+							reject('Informe o valor a ser adicionado!');
+						}
+					});
+				}
+			}).then(function (result) {
+				$.post(
+					"{{ route('users.credit') }}", 
+					{ 
+						value: result, 
+						idUser: {{ Auth::id() }},
+						'_token': $('meta[name=csrf-token]').attr('content')
+					}
+				);
+				swal({
+					type: 'success',
+					html: 'Créditos atualizado!'
+				}).then(function(){
+					location.reload();
+				});
+			});
+		}
+	</script>
 @endsection

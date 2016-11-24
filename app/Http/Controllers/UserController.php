@@ -8,9 +8,14 @@ use App\Medias;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller{
+	public function __construct(){
+		$this->middleware('auth');
+	}
+
 	public function profile($id){
 		$isAdmin = Auth::user()->profile == 0 ? true : false;
 		$author = User::find($id);
@@ -90,6 +95,12 @@ class UserController extends Controller{
 			'authors' => $authors,
 			'academics' => $academics
 		]);
+	}
+
+	public function credit(Request $request){
+		$user = User::find($request->idUser);
+		$user->credits += $request->value;
+		$user->save();
 	}
 
 	public function deleteUser($id){

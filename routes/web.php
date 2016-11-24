@@ -41,6 +41,8 @@ Route::get('/medias/download/{id}', "MediaController@downloadMedia")->name("medi
 Route::get('/medias/receipt/{id}', "MediaController@getReceipt")->name("medias.receipt");
 Route::get('/medias/delete/{id}', "MediaController@deleteMedia")->name("medias.delete");
 
+Route::get('/medias/favorites/set/{id}', "MediaController@setFavorite")->name("favorites.set");
+Route::get('/medias/favorites/unset/{id}', "MediaController@unsetFavorite")->name("favorites.unset");
 /*
 |--------------------------------------------------------------------------
 | Users Routes
@@ -50,3 +52,4 @@ Route::get('/users/home', "UserController@home")->name("users.home");
 Route::get('/users/list', "UserController@usersList")->name("users.list");
 Route::get('/users/delete/{id}', "UserController@deleteUser")->name("users.delete");
 Route::get('/users/profile/{id}', "UserController@profile")->name("users.profile");
+Route::post('/users/credit', "UserController@credit")->name("users.credit");
