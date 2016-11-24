@@ -59,14 +59,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Imagem</label>
 								<div class="col-sm-6">
-									<input type="file" class="filestyle" name="image" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s-lg" data-required="true">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Midia</label>
-								<div class="col-sm-6">
-									<input type="file" class="filestyle" name="media" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s-lg" data-required="true">
+									<input accept="image/*" type="file" class="filestyle" name="image" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s-lg" data-required="true">
 								</div>
 							</div>
 
