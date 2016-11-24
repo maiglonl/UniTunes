@@ -53,7 +53,7 @@
 						</a>
 						<ul class="dropdown-menu animated fadeInRight">            
 							<li>
-								<a href="{{ route('users.home') }}">Profile</a>
+								<a href="{{ route('users.myProfile') }}">Profile</a>
 							</li>
 							<li class="divider"></li>
 							<li>

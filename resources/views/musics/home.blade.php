@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<a href="{{ route('musics.new') }}" class="pull-right text-muted m-t-lg">
-						Upload New Song
+						Upload Nova Música
 						<i class="icon-cloud-upload i-lg inline"></i>
 					</a>
 					<h2 class="font-thin m-b">Novidades 
@@ -37,9 +37,15 @@
 											</div>
 											<div class="bottom padder m-b-sm">
 												@if($music->idFavorite != null)
-													<a href="{{ route('favorites.unset', $music->idFavorite) }}" class="pull-right"> <i class="fa fa-heart text-danger"></i></a>
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart text-danger text" onclick="unsetFavorite({{ $music->idFavorite }})"></i>
+														<i class="fa fa-heart-o text-active" onclick="setFavorite({{ $music->id }})"></i>
+													</a>
 												@else
-													<a href="{{ route('favorites.set', $music->id) }}" class="pull-right"><i class="fa fa-heart-o "></i></a>
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart-o text" onclick="setFavorite({{ $music->id }})"></i>
+														<i class="fa fa-heart text-danger text-active" onclick="unsetFavorite({{ $music->idFavorite }})"></i>
+													</a>
 												@endif
 												<a href="#"><i class="fa fa-plus-circle"></i></a>
 											</div>
@@ -65,136 +71,50 @@
 			<div class="row">
 				<!-- Favoritos -->
 				<div class="col-md-7">
-					<h3 class="font-thin">New Songs</h3>
+					<h3 class="font-thin">Favoritos</h3>
 					<div class="row row-sm">
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
+
+						@foreach($favorites as $favorite)
+							<div class="col-xs-6 col-sm-3">
+								<div class="item">
+									<div class="pos-rlt">
+										<div class="bottom">
+											<span class="badge bg-info m-l-sm m-b-sm">{{ $favorite->duration }}</span>
 										</div>
+										<div class="item-overlay opacity r r-2x bg-black">
+											<div class="center text-center m-t-n">
+												<a href="{{ URL::asset("storage/medias/$favorite->id.$favorite->mediaExt") }}" data-toggle="class" class="jp-play-me" title="{{ $favorite->authors .' - '.$favorite->name }}">
+													<i class="icon-control-play i-2x text"></i>
+													<i class="icon-control-pause i-2x text-active"></i>
+												</a>
+											</div>
+											<div class="bottom padder m-b-sm">
+												@if($favorite->idFavorite != null)
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart text-danger text" onclick="unsetFavorite({{ $favorite->idFavorite }})"></i>
+														<i class="fa fa-heart-o text-active" onclick="setFavorite({{ $favorite->id }})"></i>
+													</a>
+												@else
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart-o text" onclick="setFavorite({{ $favorite->id }})"></i>
+														<i class="fa fa-heart text-danger text-active" onclick="unsetFavorite({{ $favorite->idFavorite }})"></i>
+													</a>
+												@endif
+												<a href="#"><i class="fa fa-plus-circle"></i></a>
+											</div>
+										</div>
+										<div class="top">
+											<span class="pull-right m-t-sm m-r-sm badge bg-white">{{ $favorite->downloads }}</span>
+										</div>
+										<a href="#"><img src="{{ URL::asset("storage/images/$favorite->id.$favorite->imageExt") }}" alt="{{ $favorite->name }}" class="r r-2x img-full"></a>
 									</div>
-									<a href="#"><img src="{{ URL::asset('images/a2.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Spring rain</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Miaow</a>
+									<div class="padder-v">
+										<a href="{{ route('musics.details', $favorite->id) }}" class="text-ellipsis">{{ $favorite->name }}</a>
+										<span class="text-ellipsis text-xs text-muted">{{ $favorite->authors }}</span>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a3.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Hope</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Miya</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a8.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Listen wind</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Soyia Jess</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a9.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Breaking me</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Pett JA</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a1.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Nothing</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Willion</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a6.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Panda Style</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Lionie</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a7.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Hook Me</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Gossi</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<div class="item">
-								<div class="pos-rlt">
-									<div class="item-overlay opacity r r-2x bg-black">
-										<div class="center text-center m-t-n">
-											<a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-										</div>
-									</div>
-									<a href="#"><img src="{{ URL::asset('images/a5.png') }}" alt="" class="r r-2x img-full"></a>
-								</div>
-								<div class="padder-v">
-									<a href="#" class="text-ellipsis">Tempered Song</a>
-									<a href="#" class="text-ellipsis text-xs text-muted">Miaow</a>
-								</div>
-							</div>
-						</div>
+						@endforeach
 					</div>
 				</div>
 				<!-- /Favoritos -->
@@ -389,5 +309,13 @@
 			});
 */
 		});
+
+		function unsetFavorite($id){
+			$.get("medias/favorites/unset/"+$id);
+		}
+
+		function setFavorite($id){
+			$.get("medias/favorites/set/"+$id);
+		}
 	</script>
 @endsection

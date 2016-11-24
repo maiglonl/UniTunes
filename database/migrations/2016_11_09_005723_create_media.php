@@ -10,7 +10,7 @@ class CreateMedia extends Migration{
 			$table->increments('id');
 			$table->string('name');
 			$table->text('description');
-			$table->double('price', 3,2);
+			$table->double('price', 9,2);
 			$table->string('authors');
 			$table->integer('typeMedia');
 			$table->string('duration')->nullable();

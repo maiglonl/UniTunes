@@ -73,8 +73,12 @@ class UserController extends Controller{
 		]);
 	}
 
-	public function home(){
+	public function myProfile(){
 		return $this->profile(Auth::id());
+	}
+
+	public static function dashboard(){
+		return view('users.home');
 	}
 
 	public function usersList(){

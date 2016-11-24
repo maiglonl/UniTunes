@@ -28,9 +28,13 @@ Route::post('/musics/new', "MediaController@PostMedia")->name("musics.new");
 
 Route::get('/videos', "MediaController@videosHome")->name("videos.home");
 Route::get('/videos/detail/{id}', "MediaController@videosDetails")->name("videos.details");
+Route::get('/videos/new', "MediaController@videosNewMedia")->name("videos.new");
+Route::post('/videos/new', "MediaController@PostMedia")->name("videos.new");
 
 Route::get('/books', "MediaController@booksHome")->name("books.home");
 Route::get('/books/detail/{id}', "MediaController@booksDetails")->name("books.details");
+Route::get('/books/new', "MediaController@booksNewMedia")->name("books.new");
+Route::post('/books/new', "MediaController@PostMedia")->name("books.new");
 
 Route::get('/podcasts', "MediaController@podcastsHome")->name("podcasts.home");
 Route::get('/podcasts/detail/{id}', "MediaController@podcastsDetails")->name("podcasts.details");
@@ -48,7 +52,7 @@ Route::get('/medias/favorites/unset/{id}', "MediaController@unsetFavorite")->nam
 | Users Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/users/home', "UserController@home")->name("users.home");
+Route::get('/users/myProfile', "UserController@myProfile")->name("users.myProfile");
 Route::get('/users/list', "UserController@usersList")->name("users.list");
 Route::get('/users/delete/{id}', "UserController@deleteUser")->name("users.delete");
 Route::get('/users/profile/{id}', "UserController@profile")->name("users.profile");
