@@ -304,6 +304,153 @@ class MediaController extends Controller{
 		]);
 	}
 
+	public function podcastsHome(){
+		// Novidades
+		$podcasts = DB::table('medias')
+			->leftJoin('favorites', function($join){
+				$join->on('favorites.idMedia', '=', 'medias.id');
+				$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+			})
+			->where('medias.typeMedia', '3')
+			->orderBy('medias.updated_at', 'desc')
+			->limit(12)
+			->get(['medias.*', 'favorites.id AS idFavorite']);
+
+		// Favoritos
+		$favorites = DB::table('medias')
+			->leftJoin('favorites', function($join){
+				$join->on('favorites.idMedia', '=', 'medias.id');
+				$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+			})
+			->where([
+				['medias.typeMedia','=' , DB::raw('3')],
+				['favorites.id', '>', DB::raw('0')] 
+			])
+			->orderBy('favorites.updated_at', 'desc')
+			->get(['medias.*', 'favorites.id AS idFavorite']);
+
+		// Mais Baixadas
+		$tops = DB::table('medias')
+			->where('typeMedia', '3')
+			->orderBy('downloads', 'desc')
+			->limit(10)
+			->get();
+
+		return view('podcasts.home', [
+			'podcasts' => $podcasts,
+			'tops' => $tops,
+			'favorites' => $favorites
+		]);
+	}
+	public function podcastsNewMedia(){
+		$categs = DB::table('categories')->where('typeMedia', '3')->orderBy('name')->get();
+		return view('podcasts.new', ['categs' => $categs]);
+	}
+	public function podcastsDetails($id){
+		$isAdmin = Auth::user()->profile == 0 ? true : false;
+		$podcast = Medias::find($id);
+		$owner = User::find($podcast->idUser);
+		$category = Categories::find($podcast->idCategory);
+		$uploads = DB::table('medias')
+			->where(['idUser' => $owner->id])
+			->count();
+		$podcasts = DB::table('medias')
+			->where('authors', $podcast->authors)
+			->orderBy('updated_at', 'desc')
+			->get();
+		$isOwner = $owner->id == Auth::id();
+		$trade = DB::table('trades')
+			->where([
+				['idMedia', $podcast->id],
+				['idUser', Auth::id()],
+			])
+			->count();
+
+		$favorite = DB::table('favorites')
+			->where([
+				'idMedia' => $podcast->id,
+				'idUser' => Auth::id(),
+			])
+			->orderBy('updated_at', 'desc')
+			->first();
+
+		$canDownload = $isOwner || $podcast->price == 0 || $trade > 0;
+
+		return view('podcasts.details', [
+			'podcast' => $podcast,
+			'owner' => $owner,
+			'podcasts' => $podcasts,
+			'category' => $category,
+			'uploads' => $uploads,
+			'isOwner' => $isOwner,
+			'canDownload' => $canDownload,
+			'isAdmin' => $isAdmin,
+			'favorite' => $favorite
+		]);
+	}
+	public function podcastsList($id){
+		$categs = DB::table('categories')->where('typeMedia', '3')->orderBy('name')->get();
+		if($id == 0){
+			$favorites = DB::table('medias')
+				->leftJoin('favorites', function($join){
+					$join->on('favorites.idMedia', '=', 'medias.id');
+					$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+				})
+				->where([
+					['medias.typeMedia','=' , DB::raw('3')],
+					['favorites.id', '>', DB::raw('0')]
+				])
+				->orderBy('favorites.updated_at', 'desc')
+				->get(['medias.*', 'favorites.id AS idFavorite']);
+
+			$podcasts = DB::table('medias')
+				->leftJoin('favorites', function($join){
+					$join->on('favorites.idMedia', '=', 'medias.id');
+					$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+				})
+				->where('medias.typeMedia', '3')
+				->orderBy('medias.updated_at', 'desc')
+				->limit(12)
+				->get(['medias.*', 'favorites.id AS idFavorite']);
+			$categName = "Todas";
+		}else{
+			$favorites = DB::table('medias')
+				->leftJoin('favorites', function($join){
+					$join->on('favorites.idMedia', '=', 'medias.id');
+					$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+				})
+				->where([
+					['medias.typeMedia','=' , DB::raw('3')],
+					['favorites.id', '>', DB::raw('0')],
+					['medias.idCategory', '=', DB::raw($id)]
+				])
+				->orderBy('favorites.updated_at', 'desc')
+				->get(['medias.*', 'favorites.id AS idFavorite']);
+
+			$podcasts = DB::table('medias')
+				->leftJoin('favorites', function($join){
+					$join->on('favorites.idMedia', '=', 'medias.id');
+					$join->on('favorites.idUser', '=', DB::raw(Auth::id()));
+				})
+				->where([
+					['medias.typeMedia','=' , DB::raw('3')],
+					['medias.idCategory', '=', DB::raw($id)]
+				])
+				->orderBy('medias.updated_at', 'desc')
+				->limit(12)
+				->get(['medias.*', 'favorites.id AS idFavorite']);
+				$categName = Categories::find($id)->name;
+		}
+
+		return view('podcasts.list', [
+			'categories' => $categs,
+			'favorites' => $favorites,
+			'podcasts' => $podcasts,
+			'cotegorie' => $id,
+			'categName' => $categName
+		]);
+	}
+
 	public function videosHome(){
 		// Novidades
 		$news = DB::table('medias')
@@ -522,15 +669,6 @@ class MediaController extends Controller{
 			'cotegorie' => $id,
 			'categName' => $categName
 		]);
-	}
-	public function podcastsHome(){
-		return view('podcasts.home');
-	}
-	public function podcastsNewMedia(){
-		return view('podcasts.new');
-	}
-	public function podcastsDetails($id){
-		return view('podcasts.details');
 	}
 
 }

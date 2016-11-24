@@ -1,230 +1,238 @@
 @extends('layouts.interface')
 
-@section('appJsLibs')
+@section('intContent')
+	<section class="vbox">
+		<section class="scrollable padder-lg w-f-md" id="bjax-target">
+			<!-- Novidades -->
+			<div class="row">
+				<div class="col-xs-12">
+					<a href="{{ route('podcasts.new') }}" class="pull-right text-muted m-t-lg">
+						Upload Novo Podcast
+						<i class="icon-cloud-upload i-lg inline"></i>
+					</a>
+					<h2 class="font-thin m-b">Novidades 
+						<span class="podcastbar inline m-l-sm" style="width:20px;height:20px">
+							<span class="bar1 a1 bg-primary lter"></span>
+							<span class="bar2 a2 bg-info lt"></span>
+							<span class="bar3 a3 bg-success"></span>
+							<span class="bar4 a4 bg-warning dk"></span>
+							<span class="bar5 a5 bg-danger dker"></span>
+						</span>
+					</h2>
+					<div class="row row-sm">
+						@foreach($podcasts as $podcast)
+							<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+								<div class="item">
+									<div class="pos-rlt">
+										<div class="bottom">
+											<span class="badge bg-info m-l-sm m-b-sm">{{ $podcast->duration }}</span>
+										</div>
+										<div class="item-overlay opacity r r-2x bg-black">
+											<div class="center text-center m-t-n">
+												<a href="{{ URL::asset("storage/medias/$podcast->id.$podcast->mediaExt") }}" data-toggle="class" class="jp-play-me" title="{{ $podcast->authors .' - '.$podcast->name }}">
+													<i class="icon-control-play i-2x text"></i>
+													<i class="icon-control-pause i-2x text-active"></i>
+												</a>
+											</div>
+											<div class="bottom padder m-b-sm">
+												@if($podcast->idFavorite != null)
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart text-danger text" onclick="unsetFavorite({{ $podcast->id }})"></i>
+														<i class="fa fa-heart-o text-active" onclick="setFavorite({{ $podcast->id }})"></i>
+													</a>
+												@else
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart-o text" onclick="setFavorite({{ $podcast->id }})"></i>
+														<i class="fa fa-heart text-danger text-active" onclick="unsetFavorite({{ $podcast->id }})"></i>
+													</a>
+												@endif
+												<a href="#"><i class="fa fa-plus-circle"></i></a>
+											</div>
+										</div>
+										<div class="top">
+											<span class="pull-right m-t-sm m-r-sm badge bg-white">{{ $podcast->downloads }}</span>
+										</div>
+										<a href="#"><img style="height: 200px;" src="{{ URL::asset("storage/images/$podcast->id.$podcast->imageExt") }}" alt="{{ $podcast->name }}" class="r r-2x img-full"></a>
+									</div>
+									<div class="padder-v">
+										<a href="{{ route('podcasts.details', $podcast->id) }}" class="text-ellipsis">{{ $podcast->name }}</a>
+										<span class="text-ellipsis text-xs text-muted">{{ $podcast->authors }}</span>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					</div>
+					<a href="{{ route('podcasts.list', 0) }}" class="text-ellipsis text-center">Mais Podcasts</a>
+				</div>
+			</div>
+			<!-- /Novidades -->
 
-	<script src="{{ URL::asset('js/masonry/tiles.min.js') }}"></script>
-	<script src="{{ URL::asset('js/masonry/demo.js') }}"></script>
+			<!-- Favoritos/TopSongs -->
+			<div class="row">
+				<!-- Favoritos -->
+				<div class="col-md-7">
+					<h3 class="font-thin">Favoritos</h3>
+					<div class="row row-sm">
 
+						@foreach($favorites as $favorite)
+							<div class="col-xs-6 col-sm-3">
+								<div class="item">
+									<div class="pos-rlt">
+										<div class="bottom">
+											<span class="badge bg-info m-l-sm m-b-sm">{{ $favorite->duration }}</span>
+										</div>
+										<div class="item-overlay opacity r r-2x bg-black">
+											<div class="center text-center m-t-n">
+												<a href="{{ URL::asset("storage/medias/$favorite->id.$favorite->mediaExt") }}" data-toggle="class" class="jp-play-me" title="{{ $favorite->authors .' - '.$favorite->name }}">
+													<i class="icon-control-play i-2x text"></i>
+													<i class="icon-control-pause i-2x text-active"></i>
+												</a>
+											</div>
+											<div class="bottom padder m-b-sm">
+												@if($favorite->idFavorite != null)
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart text-danger text" onclick="unsetFavorite({{ $favorite->idFavorite }})"></i>
+														<i class="fa fa-heart-o text-active" onclick="setFavorite({{ $favorite->id }})"></i>
+													</a>
+												@else
+													<a href="#" data-toggle="class" class="pull-right">
+														<i class="fa fa-heart-o text" onclick="setFavorite({{ $favorite->id }})"></i>
+														<i class="fa fa-heart text-danger text-active" onclick="unsetFavorite({{ $favorite->idFavorite }})"></i>
+													</a>
+												@endif
+												<a href="#"><i class="fa fa-plus-circle"></i></a>
+											</div>
+										</div>
+										<div class="top">
+											<span class="pull-right m-t-sm m-r-sm badge bg-white">{{ $favorite->downloads }}</span>
+										</div>
+										<a href="#"><img src="{{ URL::asset("storage/images/$favorite->id.$favorite->imageExt") }}" alt="{{ $favorite->name }}" class="r r-2x img-full"></a>
+									</div>
+									<div class="padder-v">
+										<a href="{{ route('podcasts.details', $favorite->id) }}" class="text-ellipsis">{{ $favorite->name }}</a>
+										<span class="text-ellipsis text-xs text-muted">{{ $favorite->authors }}</span>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					</div>
+				</div>
+				<!-- /Favoritos -->
+
+				<!-- TopSongs -->
+				<div class="col-md-5">
+					<h3 class="font-thin">Top 10</h3>
+					<div class="list-group bg-white list-group-lg no-bg auto">
+
+						@foreach($podcasts as $key => $podcast)
+							<a href="{{ route('podcasts.details', $podcast->id) }}" class="list-group-item clearfix">
+								<span class="pull-right h2 text-muted m-l">{{ $key+1 }}</span>
+								<span class="pull-left thumb-sm avatar m-r">
+									<img src="{{ URL::asset("storage/images/$podcast->id.$podcast->imageExt") }}" alt="...">
+								</span>
+								<span class="clear">
+									<span>{{ $podcast->name }}</span>
+									<small class="text-muted clear text-ellipsis">{{ $podcast->authors }}</small>
+								</span>
+							</a>
+						@endforeach
+					</div>
+				</div>
+				<!-- /TopSongs -->
+			</div>
+			<!-- /Favoritos/TopSongs -->
+		</section>
+
+		<!-- Player -->
+		@include('podcasts.player')
+		<!-- /Player -->
+	</section>
 @endsection
 
-@section('intContent')
-	<section class="vbox scrollable">
-		<div id="masonry" class="pos-rlt animated fadeInUpBig">
-			<div class="item">
-				<div class="carousel slide auto" data-interval="3000">
-					<div class="carousel-inner">
-						<div class="item active">
-							<div class="item-overlay opacity animated fadeInDown wrapper bg-info">
-								<p class="text-white">N.01</p>
-								<div class="center text-center m-t-n">
-									<a href="#"><i class="icon-control-play i-2x"></i></a>
-								</div>
-							</div>
-							<div class="bottom wrapper bg-info gd">
-								<div class="m-t m-b"><a href="#" class="b-b b-danger h2 text-u-c text-lt font-bold">Teideal</a></div>
-								<p class="hidden-xs">Morbi nec nunc condimentum, egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula</p>
-							</div>
-							<a href="#"><img src="{{ URL::asset('images/m20.jpg') }}" alt="" class="img-full"></a>
-						</div>
-						<div class="item">
-							<div class="item-overlay opacity animated fadeInDown wrapper bg-info">
-								<p class="text-white">N.02</p>
-								<div class="center text-center m-t-n">
-									<a href="#"><i class="icon-control-play i-2x"></i></a>
-								</div>
-							</div>
-							<div class="bottom wrapper bg-info gd">
-								<div class="m-t m-b"><a href="#" class="b-b b-warning h2 text-u-c text-lt font-bold">Tincidunt</a></div>
-								<p class="hidden-xs">Gestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae ligula elementum</p>
-							</div>
-							<a href="#"><img src="{{ URL::asset('images/m22.jpg') }}" alt="" class="img-full"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="item-overlay gd animated fadeInUp wrapper bg-info">
-					<p class="text-white">Watch later</p>
-					<div class="center text-center m-t-n">
-						<a href="#"><i class="icon-control-play i-2x"></i></a>
-					</div>
-				</div>
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Tincidunt</a></div>
-					<p class="hidden-xs">Vivamus vel tincidunt libero, lementum ligula vitae</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m31.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-warning h4 text-u-c text-lt font-bold">Duis</a></div>
-					<p class="hidden-xs">Tincidunt libero vitae elementum</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m10.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="item-overlay active bg-primary dker wrapper text-center">
-					<div class="m-t m-b"><a href="#" class="b-b b-white h4 text-u-c text-lt font-bold">lementum</a></div>
-					<p class="hidden-xs">lementum ligula vitae est quis congue ero</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Diam</a></div>
-					<p class="hidden-xs">Con malesuada est, quis congue nibhs</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m4.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="carousel carousel-fade bg-info slide auto" data-interval="6000">
-					<div class="carousel-inner">
-						<div class="item active">
-							<div class="item-overlay active dker wrapper text-center">
-								<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Cosies</a></div>
-								<p class="hidden-xs">Duis non malesuada est, quis congue nibh</p>
-							</div>
-							<a href="#"><img src="{{ URL::asset('images/m4.jpg') }}" alt="" class="img-full"></a>
-						</div>
-						<div class="item">
-							<div class="item-overlay active dk wrapper text-center">
-								<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Malesuada</a></div>
-								<p class="hidden-xs">Aliquam sollicitudin venenatis congue nibh</p>
-							</div>
-							<a href="#"><img src="{{ URL::asset('images/m4.jpg') }}" alt="" class="img-full"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Vivamus</a></div>
-					<p class="hidden-xs">Morbi id neque quam. Aliquam sollicitudin venenatis ipsum</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m13.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-warning h4 text-u-c text-lt font-bold">Libero</a></div>
-					<p class="hidden-xs">Aliquam sollicitudin venenatis ipsum</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m30.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">habitant</a></div>
-					<p class="hidden-xs">Vel tincidunt libero, vitae ligula tristique</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m19.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="item-overlay active bg-success dker wrapper text-center">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Ligula</a></div>
-					<p class="hidden-xs">Sesuada est, quis congue tincidunt libero nibh ligula</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Malesuada</a></div>
-					<p class="hidden-xs">Pellentesque habitant morbi tristique sodales</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m7.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Donec</a></div>
-					<p class="hidden-xs">Vestibulum ullamcorper</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m18.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-primary h4 text-u-c text-lt font-bold">Eleifend</a></div>
-					<p class="hidden-xs">Malesuada augue. Donec eleifend condimentum</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m32.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Sollicitudin </a></div>
-					<p class="hidden-xs">Mauris convallis mauris at pellentesque volutpat</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m40.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-warning h2 text-u-c text-lt font-bold">Senectus </a></div>
-					<p class="hidden-xs">Fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m21.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Phasellus</a></div>
-					<p class="hidden-xs">Senectus et netus et malesuada fames</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m5.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-white h4 text-u-c text-lt font-bold">Neque</a></div>
-					<p class="hidden-xs">Consectetur adipiscing elit. Morbi id neque quam</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/a10.png') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Nisi ne</a></div>
-					<p class="hidden-xs">Orbi tristique senectus et netus et malesuada</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m4.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="item-overlay active bg-warning dker wrapper text-center">
-					<div class="m-t m-b"><a href="#" class="b-b b-white h4 text-u-c text-lt font-bold">Morbi</a></div>
-					<p class="hidden-xs">Dolor sit amet, consectetur adipiscing elit.</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Congue</a></div>
-					<p class="hidden-xs">Malesuada est, quis congue nibh</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m6.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="item-overlay active bg-info lt wrapper text-center">
-					<div class="m-t m-b"><a href="#" class="b-b b-white h4 text-u-c text-lt font-bold">Csesoi</a></div>
-					<p class="hidden-xs">Dolor sit ectetur elit senectus et malesuada</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Consectetur</a></div>
-					<p class="hidden-xs">Adipiscing elit senectus et netus mal.</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m42.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Morbi</a></div>
-					<p class="hidden-xs">Dolor sit amet, consectetur adipiscing elit.</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m9.jpg') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Soesle</a></div>
-					<p class="hidden-xs">Adipiscing elituis congue</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/a7.png') }}" alt="" class="img-full"></a>
-			</div>
-			<div class="item">
-				<div class="bottom gd bg-info wrapper">
-					<div class="m-t m-b"><a href="#" class="b-b b-info h4 text-u-c text-lt font-bold">Congue</a></div>
-					<p class="hidden-xs">Malesuada est, congue nibh quis elituis</p>
-				</div>
-				<a href="#"><img src="{{ URL::asset('images/m12.jpg') }}" alt="" class="img-full"></a>
-			</div>
-		</div>
-	</section>
+@section("appFooter")
+	<script>
+		$(document).ready(function(){
+
+			var	my_jPlayer = $("#jplayer_N");
+			var my_trackName = $("#jp_container_N .jp-title");
+			var	opt_play_first = true; // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
+			var opt_auto_play = true; // If true, when a track is selected, it will auto-play.
+
+			// A flag to capture the first track
+			var first_track = true;
+
+			// Instance jPlayer
+			var player = my_jPlayer.jPlayer({
+				ready: function () {
+					$("#jp_container_N .track-default").click();
+				},
+				timeupdate: function(event) {
+				},
+				play: function(event) {
+				},
+				pause: function(event) {
+				},
+				ended: function(event) {
+				},
+				cssSelectorAncestor: "#jp_container_N",
+				swfPath: "js/jPlayer",
+				supplied: "webmv, ogv, m4v, oga, mp3",
+				smoothPlayBar: false,
+				audioFullScreen: false
+			});
+
+			// Create click handlers for the different tracks
+			$(".jp-play-me").click(function(e) {
+				e && e.preventDefault();
+
+				var $this = $(e.target);
+				if (!$this.is('a')) $this = $this.closest('a');
+
+				// Toogle other icons
+				$('.jp-play-me').not($this).removeClass('active');
+				$('.jp-play-me').parent('li').not($this.parent('li')).removeClass('active');
+				$('.jp-play-me').not($this).removeClass('playing');
+				$('.jp-play-me').parent('li').not($this.parent('li')).removeClass('playing');
+
+				$this.toggleClass('active');
+				$this.parent('li').toggleClass('active');
+				if( !$this.hasClass('active') ){
+					my_jPlayer.jPlayer("pause");
+				}else{
+					if( !$this.hasClass('playing') ){
+						my_trackName.text($(this).attr('title'));
+						my_jPlayer.jPlayer("setMedia", {
+							mp3: $(this).attr("href")
+						});
+						$this.toggleClass('playing');
+					}
+
+					if((opt_play_first && first_track) || (opt_auto_play && !first_track)) {
+						my_jPlayer.jPlayer("play");
+					}
+					first_track = false;
+					$(this).blur();
+					return false;
+				}
+			});
+
+			$(document).on($.jPlayer.event.pause,  function(){
+				$('.podcastbar').removeClass('animate');
+				$('.jp-play-me').removeClass('active');
+				$('.jp-play-me').parent('li').removeClass('active');
+			});
+
+			$(document).on($.jPlayer.event.play, function(){
+				$('.podcastbar').addClass('animate');
+			});
+		});
+
+		function unsetFavorite($id){
+			$.get("medias/favorites/unset/"+$id);
+		}
+
+		function setFavorite($id){
+			$.get("medias/favorites/set/"+$id);
+		}
+	</script>
 @endsection

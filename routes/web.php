@@ -40,6 +40,9 @@ Route::post('/books/new', "MediaController@PostMedia")->name("books.new");
 
 Route::get('/podcasts', "MediaController@podcastsHome")->name("podcasts.home");
 Route::get('/podcasts/detail/{id}', "MediaController@podcastsDetails")->name("podcasts.details");
+Route::get('/podcasts/list/{id}', "MediaController@podcastsList")->name("podcasts.list");
+Route::get('/podcasts/new', "MediaController@podcastsNewMedia")->name("podcasts.new");
+Route::post('/podcasts/new', "MediaController@PostMedia")->name("podcasts.new");
 
 Route::get('/medias/buy/{id}', "MediaController@buyMedia")->name("medias.buy");
 Route::get('/medias/download/{id}', "MediaController@downloadMedia")->name("medias.download");
