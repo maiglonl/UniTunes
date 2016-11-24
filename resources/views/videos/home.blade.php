@@ -20,6 +20,19 @@
 									<div class="center text-center m-t-n">
 										<a href="{{ route('videos.details', $video->id) }}"><i class="fa fa-play-circle i-2x"></i></a>
 									</div>
+									<div class="bottom padder m-b-sm">
+										@if($video->idFavorite != null)
+											<a href="#" data-toggle="class" class="pull-right">
+												<i class="fa fa-heart text-danger text" onclick="unsetFavorite({{ $video->id }})"></i>
+												<i class="fa fa-heart-o text-active" onclick="setFavorite({{ $video->id }})"></i>
+											</a>
+										@else
+											<a href="#" data-toggle="class" class="pull-right">
+												<i class="fa fa-heart-o text" onclick="setFavorite({{ $video->id }})"></i>
+												<i class="fa fa-heart text-danger text-active" onclick="unsetFavorite({{ $video->id }})"></i>
+											</a>
+										@endif
+									</div>
 								</div>
 								<a href="{{ route('videos.details', $video->id) }}">
 									<img style="height: 220px;" src="{{ URL::asset("storage/images/$video->id.$video->imageExt") }}" alt="" class="r r-2x img-full">

@@ -32,13 +32,13 @@
 											<div class="center text-center m-t-n">
 												@if($book->idFavorite != null)
 													<a href="#" data-toggle="class">
-														<i class="fa fa-heart i-2x text-danger text" onclick="unsetFavorite({{ $book->idFavorite }})"></i>
+														<i class="fa fa-heart i-2x text-danger text" onclick="unsetFavorite({{ $book->id }})"></i>
 														<i class="fa fa-heart-o i-2x text-active" onclick="setFavorite({{ $book->id }})"></i>
 													</a>
 												@else
 													<a href="#" data-toggle="class">
 														<i class="fa fa-heart-o i-2x text" onclick="setFavorite({{ $book->id }})"></i>
-														<i class="fa fa-heart i-2x text-danger text-active" onclick="unsetFavorite({{ $book->idFavorite }})"></i>
+														<i class="fa fa-heart i-2x text-danger text-active" onclick="unsetFavorite({{ $book->id }})"></i>
 													</a>
 												@endif
 											</div>
@@ -56,6 +56,7 @@
 							</div>
 						@endforeach
 					</div>
+					<a href="{{ route('books.list', 0) }}" class="text-ellipsis text-center">Mais Livros</a>
 				</div>
 			</div>
 			<!-- /Novidades -->

@@ -50,13 +50,18 @@ class UserController extends Controller{
 		$uploads = DB::table('medias')
 			->where(['idUser' => $author->id])
 			->count();
-		$purchases = DB::table('trades')
-			->where(['idUser' => $id])
-			->count();
-		$sales = DB::table('trades')
-			->leftJoin('medias', 'trades.idMedia', '=', 'medias.id')
-			->where(['medias.idUser' => $id])
-			->count();
+		$purchases = DB::select('
+			select trades.*, medias.authors, medias.name, users.name as seller from trades 
+			left join medias on (idMedia = medias.id)
+			left join users on (medias.idUser = users.id)
+			where trades.idUser = ?
+		', [Auth::id()]);
+		$sales = DB::select('
+			select trades.*, medias.authors, medias.name, users.name as buyer from trades 
+			left join medias on (idMedia = medias.id)
+			left join users on (trades.idUser = users.id)
+			where medias.idUser = ?
+		', [Auth::id()]);
 		$canDelete = $isAdmin || ($author->id == Auth::id() && $author->profile > 0);
 
 		return view('users.profile', [

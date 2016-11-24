@@ -8,7 +8,7 @@ class CreateTrades extends Migration{
    public function up(){
 		Schema::create('trades', function (Blueprint $table) {
 			$table->increments('id');
-			$table->double('price', 3,2);
+			$table->double('price', 9,2);
 			$table->timestamps();
 		});
 

@@ -12,23 +12,22 @@
 							</div>
 							<div class="col-sm-8">
 								<h1 class="pull-right text-black m-t-none" style="font-size: 40pt;">R$ {{ $book->price }}</h1>
-								<h2 class="m-t-none m-b-none text-black">{{ $book->name }}</h2>
+								<h2 class="m-t-none m-b-none text-black">{{ $book->name }}
+								@if($favorite != null)
+									<a href="#" data-toggle="class">
+										<i class="fa fa-star text-warning text" onclick="unsetFavorite({{ $book->id }})"></i>
+										<i class="fa fa-star-o text-active" onclick="setFavorite({{ $book->id }})"></i>
+									</a>
+								@else
+									<a href="#" data-toggle="class">
+										<i class="fa fa-star-o text" onclick="setFavorite({{ $book->id }})"></i>
+										<i class="fa fa-star text-warning text-active" onclick="unsetFavorite({{ $book->id }})"></i>
+									</a>
+								@endif
+								</h2>
 								<h3 class="m-t-none ">{{ $book->authors }}</h3>
 								<div class="clearfix m-b-lg">
 									<div class="clear">
-									@if($favorite != null)
-										@if($favorite->id != null)
-											<a href="#" data-toggle="class">
-												<i class="i-2x fa fa-heart text-danger text" onclick="unsetFavorite({{ $favorite->id }})"></i>
-												<i class="i-2x fa fa-heart-o text-active" onclick="setFavorite({{ $favorite->id }})"></i>
-											</a>
-										@else
-											<a href="#" data-toggle="class">
-												<i class="i-2x fa fa-heart-o text" onclick="setFavorite({{ $favorite->id }})"></i>
-												<i class="i-2x fa fa-heart text-danger text-active" onclick="unsetFavorite({{ $favorite->id }})"></i>
-											</a>
-										@endif
-									@endif
 										<a href="{{ route('users.profile', $owner->id) }}" class="text-info">{{ $owner->name }}</a>
 										<small class="block text-muted">{{ $uploads }} uploads</small>
 									</div>
@@ -59,13 +58,9 @@
 										<a href="#" class="m-r-sm"><i class="icon-cloud-download"></i></a>
 										<a href="{{ route('books.details', $bookList->id) }}"><i class="icon-plus"></i></a>
 									</div>
-									<a href="#" class="jp-play-me m-r-sm pull-left">
-										<i class="icon-control-play text"></i>
-										<i class="icon-control-pause text-active"></i>
-									</a>
 									<div class="clear text-ellipsis">
-										<span>{{ $bookList->authors }} - {{ $bookList->name }}</span>
-										<span class="text-muted"> -- {{ $bookList->duration }}</span>
+										<span>{{ $bookList->authors }} - {{ $bookList->name }}</span><br>
+										<span class="text-muted">{{ $bookList->description }}</span>
 									</div>
 								</li>
 							@endforeach
@@ -75,4 +70,16 @@
 			</div>
 		</section>
 	</section>
+@endsection
+
+@section("appFooter")
+	<script>
+		function unsetFavorite($id){
+			$.get("/medias/favorites/unset/"+$id);
+		}
+
+		function setFavorite($id){
+			$.get("/medias/favorites/set/"+$id);
+		}
+	</script>
 @endsection

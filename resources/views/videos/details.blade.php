@@ -59,7 +59,19 @@
 							<!-- / video player -->
 							<div class="wrapper-lg">
 								<h1 class="pull-right text-black m-t-none" style="font-size: 40pt;">R$ {{ $video->price }}</h1>
-								<h2 class="m-t-none m-b-none text-black">{{ $video->name }}</h2>
+								<h2 class="m-t-none m-b-none text-black">{{ $video->name }}
+								@if($favorite != null)
+									<a href="#" data-toggle="class">
+										<i class="fa fa-star text-warning text" onclick="unsetFavorite({{ $video->id }})"></i>
+										<i class="fa fa-star-o text-active" onclick="setFavorite({{ $video->id }})"></i>
+									</a>
+								@else
+									<a href="#" data-toggle="class">
+										<i class="fa fa-star-o text" onclick="setFavorite({{ $video->id }})"></i>
+										<i class="fa fa-star text-warning text-active" onclick="unsetFavorite({{ $video->id }})"></i>
+									</a>
+								@endif
+								</h2>
 								<h3 class="m-t-none ">{{ $video->authors }}</h3>
 								<div class="clearfix m-b-lg">
 									<div class="clear">
@@ -137,5 +149,12 @@
 			smoothPlayBar: true,
 			keyEnabled: true
 		});
+		function unsetFavorite($id){
+			$.get("/medias/favorites/unset/"+$id);
+		}
+
+		function setFavorite($id){
+			$.get("/medias/favorites/set/"+$id);
+		}
 	</script>
 @endsection

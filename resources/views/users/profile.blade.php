@@ -52,13 +52,13 @@
 										@endif
 										<div class="col-xs-4">
 											<a href="#">
-												<span class="m-b-xs h4 block">{{ $purchases }}</span>
+												<span class="m-b-xs h4 block">{{ count($purchases) }}</span>
 												<small class="text-muted">Compras</small>
 											</a>
 										</div>
 										<div class="col-xs-4">
 											<a href="#">
-												<span class="m-b-xs h4 block">{{ $sales }}</span>
+												<span class="m-b-xs h4 block">{{ count($sales) }}</span>
 												<small class="text-muted">Vendas</small>
 											</a>
 										</div>
@@ -88,6 +88,10 @@
 								<li class=""><a href="#videos" data-toggle="tab">Vídeos</a></li>
 								<li class=""><a href="#podcasts" data-toggle="tab">Podcasts</a></li>
 								<li class=""><a href="#books" data-toggle="tab">Livros</a></li>
+								@if($author->id == Auth::id())
+									<li class=""><a href="#purchases" data-toggle="tab">Compras</a></li>
+									<li class=""><a href="#sales" data-toggle="tab">Vendas</a></li>
+								@endif
 							</ul>
 						</header>
 						<section class="scrollable">
@@ -163,14 +167,6 @@
 										@if(count($podcasts) == 0)
 											<h4 class="text-center m-t-xl">Nenhum podcast encontrada.</h4>
 										@endif
-										@if($author->id == Auth::id())
-											<div class="text-center m-t-xl">
-												<a href="{{ route('musics.new') }}" class=" m-t-lg">
-													Cadastrar novo podcast
-													<i class="icon-cloud-upload i-lg inline"></i>
-												</a>
-											</div>
-										@endif
 									</ul>
 								</div>
 								<div class="tab-pane" id="books">
@@ -200,6 +196,34 @@
 										@endif
 									</ul>
 								</div>
+								@if($author->id == Auth::id())
+									<div class="tab-pane" id="purchases">
+										<ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
+											@foreach($purchases as $purchase)
+												<li class="list-group-item">
+													<a href="{{ route('medias.receipt', $purchase->id) }}" class="clear">
+														<small class="pull-right">{{ $purchase->created_at }}</small>
+														<strong class="block">{{ $purchase->authors." - ".$purchase->name }}</strong>
+														<small>Comprado de {{ $purchase->seller }} por R${{ $purchase->price }}</small>
+													</a>
+												</li>
+											@endforeach
+										</ul>
+									</div>
+									<div class="tab-pane" id="sales">
+										<ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
+											@foreach($sales as $sale)
+												<li class="list-group-item">
+													<a href="{{ route('medias.receipt', $sale->id) }}" class="clear">
+														<small class="pull-right">{{ $sale->created_at }}</small>
+														<strong class="block">{{ $sale->authors." - ".$sale->name }}</strong>
+														<small>Vendido para {{ $sale->buyer }} por R${{ $sale->price }}</small>
+													</a>
+												</li>
+											@endforeach
+										</ul>
+									</div>
+								@endif
 							</div>
 						</section>
 					</section>

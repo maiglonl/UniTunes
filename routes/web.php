@@ -23,6 +23,7 @@ Auth::routes();
 */
 Route::get('/musics', "MediaController@musicsHome")->name("musics.home");
 Route::get('/musics/detail/{id}', "MediaController@musicsDetails")->name("musics.details");
+Route::get('/musics/list/{id}', "MediaController@musicsList")->name("musics.list");
 Route::get('/musics/new', "MediaController@musicsNewMedia")->name("musics.new");
 Route::post('/musics/new', "MediaController@PostMedia")->name("musics.new");
 
@@ -33,6 +34,7 @@ Route::post('/videos/new', "MediaController@PostMedia")->name("videos.new");
 
 Route::get('/books', "MediaController@booksHome")->name("books.home");
 Route::get('/books/detail/{id}', "MediaController@booksDetails")->name("books.details");
+Route::get('/books/list/{id}', "MediaController@booksList")->name("books.list");
 Route::get('/books/new', "MediaController@booksNewMedia")->name("books.new");
 Route::post('/books/new', "MediaController@PostMedia")->name("books.new");
 
